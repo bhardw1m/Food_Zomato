@@ -3,9 +3,9 @@ import {View, Image, StyleSheet, Text} from 'react-native'
 
 const ResultDetail =({result}) => {
     return <View style = {styles.container}>
-        <Image style = {styles.image} source = { {uri: result.image_url } } />
+        <Image style = {styles.image} source = { {uri: result.thumb } } />
     <Text style = {styles.name}> {result.name}</Text>
-<Text style = {styles.rating}> {result.rating} stars, Reviews: {result.review_count}</Text>
+<Text style = {styles.rating}> {result.user_rating.aggregate_rating} stars, Reviews: {result.all_reviews_count}</Text>
 
     </View>
 }

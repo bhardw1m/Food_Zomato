@@ -16,11 +16,11 @@ const ResultsList = ({title, resultsByPrice, navigation}) => {
             showsHorizontalScrollIndicator = {false}
             horizontal
             data = {resultsByPrice}
-            keyExtractor = {resultsByPrice.id}
+            keyExtractor = {result => result.restaurant.id}
             renderItem = {({ item }) => 
                 {
-                    return ( <TouchableOpacity onPress = {() => {navigation.navigate('ResultsShow', { id: item.id})}}>
-                    <ResultsDetail result = {item} />
+                    return ( <TouchableOpacity onPress = {() => {navigation.navigate('ResultsShow', { id: item.restaurant.id})}}>
+                    <ResultsDetail result = {item.restaurant} />
                     </TouchableOpacity> )
                     }
         }

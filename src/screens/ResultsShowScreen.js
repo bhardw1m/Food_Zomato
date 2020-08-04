@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import {View, Text, StyleSheet, FlatList, Image} from 'react-native'
-import yelp from "../api/yelp"
+import zomato from "../api/zomato"
 
 const ResultsShowScreen = ({navigation}) => {
 
     
     const id = navigation.getParam('id')
-
+    
     const [result, setResult] = useState(null)
  
     const getBusineess = async (id) => {
 
-        const response = await yelp.get(`${id}`)
+        const response = await zomato.get(`/restaurant?res_id=${id}`)
         setResult(response.data)
+        
     }
 
     
@@ -24,14 +25,17 @@ const ResultsShowScreen = ({navigation}) => {
     if(!result) {
         return null;
     }
-    
+    console.log(result)
     return <View>
         <Text style = {styles.textStyle}>{result.name} </Text>
+        <Image style = {styles.image} source = {{uri: result.thumb}}/>
+        <Text> HighLights: </Text>
         <FlatList 
-            data = {result.photos}
+            data = {result.highlights}
             keyExtractor = {(love) => love}
             renderItem = {({ item }) => {
-                return <Image style = {styles.image} source = {{uri: item}}/>
+               
+                return <Text>  {item}</Text>
             }}
         
         

@@ -29,7 +29,7 @@ const SearchScreen = () => {
        
             
         return results.filter(result => {
-            return result.price === price}) 
+            return result.restaurant.price_range === price}) 
             
     }
 
@@ -38,12 +38,13 @@ const SearchScreen = () => {
         term = {term} 
         onChangeTerm = {(newTerm) => {setTerm(newTerm)}}
         onTermSubmit = {() => {
-            searchApi({term})
+            searchApi(term)
             getRes({term})
             setTerm('')
              
             } }    
         />
+       
 
          {errMessage ? <Text>{errMessage}</Text> : null}
        
@@ -53,22 +54,22 @@ const SearchScreen = () => {
         And we have found {results.length} {sInResult(results.length)} </Text>)}
         <ScrollView>
         <ResultsList 
-        resultsByPrice = {resultsByPrice('$')} 
+        resultsByPrice = {resultsByPrice(1)} 
         title = "Cost Friendly"
         />
-         {resultsByPrice('$').length > 0 ? (<Text> Total Results in this category: {resultsByPrice('$').length}</Text>): null}
+         {resultsByPrice(1).length > 0 ? (<Text> Total Results in this category: {resultsByPrice(1).length}</Text>): null}
 
         <ResultsList 
-        resultsByPrice = {resultsByPrice('$$')}
+        resultsByPrice = {resultsByPrice(3)}
         title = "Bit Pricier"
         />
-        {resultsByPrice('$$').length > 0 ? (<Text> Total Results in this category: {resultsByPrice('$$').length}</Text>): null}
+        {resultsByPrice(2).length > 0 ? (<Text> Total Results in this category: {resultsByPrice(2).length}</Text>): null}
 
         <ResultsList 
-        resultsByPrice = {resultsByPrice('$$$')} 
+        resultsByPrice = {resultsByPrice(4)} 
         title = "Big Spender"
         />
-        {resultsByPrice('$$$').length > 0 ? (<Text> Total Results in this category: {resultsByPrice('$$$').length}</Text>): null}
+        {resultsByPrice(4).length > 0 ? (<Text> Total Results in this category: {resultsByPrice(4).length}</Text>): null}
         </ScrollView>
         </View>
        
